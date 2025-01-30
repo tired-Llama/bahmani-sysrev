@@ -1,0 +1,285 @@
+QA prompts
+=============================== cross-sectional ============================================
+answer the following questions. respond with (a, b, c, or d)
+
+
+Selection:
+
+
+
+Representativeness of the sample:
+a. Truly representative of the average in the target population. * (all subjects or
+random sampling)
+b. Somewhat representative of the average in the target group. * (non-random
+sampling)
+c. Selected group of users/convenience sample.
+d. No description of the derivation of the included subjects.
+
+Sample size:
+a. Justified and satisfactory (including sample size calculation). *
+b. Not justified.
+c. No information provided
+
+Non-respondents:
+a. Proportion of target sample recruited attains pre-specified target or basic
+summary of non-respondent characteristics in sampling frame recorded. *
+b. Unsatisfactory recruitment rate, no summary data on non-respondents.
+c. No information provided
+
+Ascertainment of the exposure (risk factor):
+a. Vaccine records/vaccine registry/clinic registers/hospital records only. **
+b. Parental or personal recall and vaccine/hospital records. *
+c. Parental/personal recall only.
+Comparability: (Maximum 2 stars)
+
+Comparability of subjects in different outcome groups on the basis of design or
+analysis. Confounding factors controlled.
+a. Data/ results adjusted for relevant predictors/risk factors/confounders e.g.
+age, sex, time since vaccination, etc. **
+b. Data/results not adjusted for all relevant confounders/risk factors/information
+not provided.
+Outcome:
+
+Assessment of outcome:
+a. Independent blind assessment using objective validated laboratory methods. **
+b. Unblinded assessment using objective validated laboratory methods. **
+c. Used non-standard or non-validated laboratory methods with gold standard. *
+d. No description/non-standard laboratory methods used.
+
+Statistical test:
+a. Statistical test used to analyse the data clearly described, appropriate and
+measures of association presented including confidence intervals and
+probability level (p value). *
+b. Statistical test not appropriate, not described or incomplete.
+
+================================ cohort =============================================
+answer the following questions. respond with (a, b, c, or d)
+
+Selection
+1) Representativeness of the exposed cohort
+a) truly representative of the average _______________ (describe) in the community ¯¯
+b) somewhat representative of the average ______________ in the community ¯¯
+c) selected group of users eg nurses, volunteers
+d) no description of the derivation of the cohort
+2) Selection of the non exposed cohort
+a) drawn from the same community as the exposed cohort ¯¯
+b) drawn from a different source
+c) no description of the derivation of the non exposed cohort
+3) Ascertainment of exposure
+a) secure record (eg surgical records) ¯¯
+b) structured interview ¯¯
+c) written self report
+d) no description
+4) Demonstration that outcome of interest was not present at start of study
+a) yes ¯¯
+b) no
+Comparability
+1) Comparability of cohorts on the basis of the design or analysis
+a) study controls for _____________ (select the most important factor) ¯¯
+b) study controls for any additional factor ¯¯ (This criteria could be modified to indicate specific
+control for a second important factor.)
+Outcome
+1) Assessment of outcome
+a) independent blind assessment ¯¯
+b) record linkage ¯¯
+c) self report
+d) no description
+2) Was follow-up long enough for outcomes to occur
+a) yes (select an adequate follow up period for outcome of interest) ¯¯
+b) no
+3) Adequacy of follow up of cohorts
+a) complete follow up - all subjects accounted for ¯¯
+b) subjects lost to follow up unlikely to introduce bias - small number lost - > ____ % (select an
+adequate %) follow up, or description provided of those lost) ¯¯
+c) follow up rate < ____% (select an adequate %) and no description of those lost
+d) no statement
+
+================================= case-control =============================================
+answer the following questions. respond with (a, b, c, or d)
+
+Selection
+1) Is the case definition adequate?
+a) yes, with independent validation ¯¯
+b) yes, eg record linkage or based on self reports
+c) no description
+2) Representativeness of the cases
+a) consecutive or obviously representative series of cases ¯¯
+b) potential for selection biases or not stated
+3) Selection of Controls
+a) community controls ¯¯
+b) hospital controls
+c) no description
+4) Definition of Controls
+a) no history of disease (endpoint) ¯¯
+b) no description of source
+Comparability
+1) Comparability of cases and controls on the basis of the design or analysis
+a) study controls for _______________ (Select the most important factor.) ¯¯
+b) study controls for any additional factor ¯¯ (This criteria could be modified to indicate specific
+control for a second important factor.)
+Exposure
+1) Ascertainment of exposure
+a) secure record (eg surgical records) ¯¯
+b) structured interview where blind to case/control status ¯¯
+c) interview not blinded to case/control status
+d) written self report or medical record only
+e) no description
+2) Same method of ascertainment for cases and controls
+a) yes ¯¯
+b) no
+3) Non-Response rate
+a) same rate for both groups ¯¯
+b) non respondents described
+c) rate different and no designation
+
+
+======================= ROBINS-I ====================================
+
+1. Bias due to confounding
+1.1. Is there potential for confounding of the effect of intervention in this study?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N)
+1.2. Was the analysis based on splitting participants' follow-up time according to the intervention received?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+1.3. Were intervention discontinuations or switches likely to be related to factors that are prognostic for the outcome?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+1.4. Did the authors use an appropriate analysis method that controlled for all the important confounding domains?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+1.5. Were confounding domains that were controlled for measured validly and reliably by the variables available in this study?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+1.6. Did the authors control for any post-intervention variables that could have been affected by the intervention?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+1.7. Did the authors use an appropriate analysis method that controlled for all the important confounding domains and for time-varying confounding?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+1.8. Were confounding domains that were controlled for measured validly and reliably by the variables available in this study?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+2. Bias in selection of participants into the study
+2.1. Was selection of participants into the study (or into the analysis) based on participant characteristics observed after the start of intervention?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+2.2. Were the post-intervention variables that influenced selection likely to be associated with intervention?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+2.3. Were the post-intervention variables that influenced selection likely to be influenced by the outcome or a cause of the outcome?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+2.4. Do the start of follow-up and the start of intervention coincide for most participants?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+2.5. Were adjustment techniques used to correct for the presence of selection biases?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+3. Bias in classification of interventions
+3.1. Were intervention groups clearly defined?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+3.2. Was the information used to define intervention groups recorded at the start of the intervention?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+3.3. Could classification of intervention status have been affected by knowledge of the outcome or risk of the outcome?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+4. Bias due to deviations from intended interventions
+4.1. Were there deviations from the intended intervention beyond what would be expected in usual practice?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+4.2. Were these deviations from the intended intervention unbalanced between groups and likely to have affected the outcome?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+4.3. Were important co-interventions balanced across intervention groups?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+4.4. Was the intervention implemented successfully for most participants?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+4.5. Did study participants adhere to the assigned intervention regimen?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+4.6. Was an appropriate analysis used to estimate the effect of starting and adhering to the intervention?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+5. Bias due to missing data
+5.1. Were outcome data available for all, or nearly all, participants?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+5.2. Were participants excluded due to missing data on intervention status?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+5.3. Were participants excluded due to missing data on other variables needed for the analysis?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+5.4. Are the proportions of participants and reasons for missing data similar across interventions?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+5.5. Is there evidence that results were robust to the presence of missing data?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+6. Bias in measurement of outcomes
+6.1. Could the outcome measure have been influenced by knowledge of the intervention received?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+6.2. Were outcome assessors aware of the intervention received by study participants?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+6.3. Were the methods of outcome assessment comparable across intervention groups?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+6.4. Were any systematic errors in measurement of the outcome related to the intervention received?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+7. Bias in selection of the reported result
+7.1. Is the reported effect estimate likely to be selected on the basis of the results from multiple outcome measurements within the outcome domain?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+7.2. Is the reported effect estimate likely to be selected on the basis of the results from multiple analyses of the intervention-outcome relationship?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+7.3. Is the reported effect estimate likely to be selected on the basis of the results from different subgroups?
+
+Options: Yes (Y) / Probably Yes (PY) / Probably No (PN) / No (N) / No Information (NI)
+
+
+
+================================= MINORS ==============================================
+Answer the following questions or statements with
+2 (reported and adequate)
+1 (reported but inadequate)
+0 (not reported)
+
+(1) A clearly stated aim: The question addressed should be precise and relevant in the light of available literature
+(2) Inclusion of consecutive patients: All patients potentially fir for inclusion (satisfying the criteria for inclusion) have been included in the study during the study period
+(3) Prospective collection of data: Data were collected according to a protocol established before the beginning of the study.
+(4) Endpoints appropriate to the aim of the study: Unambiguous explanation of the criteria used to evaluate the main outcome, which should be in accordance with the question addressed by the study. Also, the endpoints should be assessed on an intention-to-treat basis
+(5) Unbiased assessment of the study endpoint: Blind evaluation of objective endpoints and double-blind evaluation of subjective endpoints. Otherwise the reasons for not blinding should b stated.
+(6) Follow-up period appropriate to the aim of the study: The follow-up should be sufficiently long to allow the assessment of the main endpoint and possible adverse events
+(7) Loss to follow up less than 5%: All patient should be included in the follow up. Otherwise, the proportion lost to follow up should not exceed the proportion experiencing the major endpoint
+(8) Prospective calculation of study size: Information of the size of detectable difference of interest with a calculation of 95% confidence interval, according to the expected incidence of the outcome event, and information about the level for statistical significance and estimates of power when comparing outcomes.
+(9) An adequate control group: Having a gold standard diagnostic test or therapeutic intervention recognized as the optimal intervention according to the available published data.
+(10) Contemporary groups: Control and studied group should be managed during the same time period (no historical controls)
+(11) Baseline equivalence of groups: The groups should be similar regarding the criteria other than the studied endpoints. Absence of confounding factors that could bias the interpretation of results.
+(12) Adequate statistical analyses: Whether the statistics were in accordance with the type of study with calculation of confidence intervals or relative risk
+
+Answer the following questions or statements with
+2 (reported and adequate)
+1 (reported but inadequate)
+0 (not reported)
+
+(1) A clearly stated aim
+(2) Inclusion of consecutive patients
+(3) Prospective collection of data
+(4) Endpoints appropriate to the aim of the study
+(5) Unbiased assessment of the study endpoint
+(6) Follow-up period appropriate to the aim of the study
+(7) Loss to follow up less than 5%
+(8) Prospective calculation of study size
+(9) An adequate control group
+(10) Contemporary groups
+(11) Baseline equivalence of groups
+(12) Adequate statistical analyses
