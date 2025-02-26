@@ -1,0 +1,29 @@
+```{r load_packages}
+library(tidyverse)
+library(grid)
+library(meta)
+library(metafor)
+library(ggplot2)
+```
+```{r custom_functions}
+substudies <- function(data,sep = "\n"){
+    data %>% 
+    mutate_all(.funs = ~str_trim(.)) %>%    # remove leading and trailing whote spaces
+    mutate_all(.funs = ~strsplit(.,split = sep)) %>%    # split all columns
+    unnest_longer(col = colnames(data),keep_empty = TRUE) %>% 
+    mutate_all(.funs = ~sub(pattern = ".*:",replacement = "",.)) %>% 
+    mutate_all(.funs = ~sub(pattern = ".*=",replacement = "",.))
+}
+```
+```{r load_data}
+data <- read.csv("shoulder/meta-analysis/shoulder-data.csv")
+excluded_no_reporting <- c("Hahn","Allaart","Feuerriegel","Hess", "Kaniewska", "Kim 2022","Lee 2023_CSS-Net","xia","shinohara","oeding_supplementary","obama","ni")
+df <- data  %>% 
+    select(-n_female) %>% 
+    filter(is.na(Study.ID)==FALSE) %>% 
+    filter(!(Study.ID %in% excluded_no_reporting)) %>% 
+    substudies() 
+# View(df)
+# glimpse(df)
+# colnames(df)
+```
