@@ -8,22 +8,30 @@ library(ggplot2)
 ```{r custom_functions}
 substudies <- function(data,sep = "\n"){
     data %>% 
-    mutate_all(.funs = ~str_trim(.)) %>%    # remove leading and trailing whote spaces
+    mutate_all(.funs = ~str_trim(.)) %>%    # remove leading and trailing white spaces
     mutate_all(.funs = ~strsplit(.,split = sep)) %>%    # split all columns
     unnest_longer(col = colnames(data),keep_empty = TRUE) %>% 
-    mutate_all(.funs = ~sub(pattern = ".*:",replacement = "",.)) %>% 
-    mutate_all(.funs = ~sub(pattern = ".*=",replacement = "",.))
+    mutate_all(.funs = ~sub(pattern = "±.*",replacement = "",.)) %>%   #   remove leading characters after "±"
+    mutate_all(.funs = ~sub(pattern = ".*:",replacement = "",.)) %>%    #   remove leading characters before colon
+    mutate_all(.funs = ~sub(pattern = ".*=",replacement = "",.))    #   remove leading characters before "="
 }
 ```
 ```{r load_data}
 data <- read.csv("shoulder/meta-analysis/shoulder-data.csv")
-excluded_no_reporting <- c("Hahn","Allaart","Feuerriegel","Hess", "Kaniewska", "Kim 2022","Lee 2023_CSS-Net","xia","shinohara","oeding_supplementary","obama","ni")
+# //NOTE - extracted data is based on optimal cutoff of the tests and not the 95%!!
+excluded_no_reporting <- c("Hahn","Allaart","Daher","Feuerriegel","Hess", "Kaniewska", "Kim 2022","Lee 2023_CSS-Net","xia","shinohara","oeding_supplementary","obama","ni","Lin 2014", "Medina")
+excluded_not_classification <- c("Conze","Kim 2024","Lee 2023_Automated","kim 2019", "mu")
+excluded_ambiguous <- c("Nia")
 df <- data  %>% 
-    select(-n_female) %>% 
+    select(-c(n_female,N)) %>% 
+    select(-matches("^training_")) %>%  #   remove columns with data on model training
+    select(-matches("^validation_")) %>%  #   remove columns with data on model validation
     filter(is.na(Study.ID)==FALSE) %>% 
     filter(!(Study.ID %in% excluded_no_reporting)) %>% 
+    filter(!(Study.ID %in% excluded_not_classification)) %>% 
+    filter (!(Study.ID %in% excluded_ambiguous)) %>% 
     substudies() 
-# View(df)
+View(df)
 # glimpse(df)
 # colnames(df)
 ```
