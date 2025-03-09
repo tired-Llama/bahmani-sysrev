@@ -1,8 +1,9 @@
 ```{r}
-df_meta <- df_test
+df_meta <- df_all
+# df_meta$other.grouping[31] <- "(CNN) based on the\nVoxception-ResNet"
 df_diag <- df_meta  %>% 
     mutate(DP = TP+FN, DN = FP+TN) %>% 
-    select(c(Study.ID,lesions,AI_model,other.grouping,TP,FN,FP,TN,DP,DN)) %>% 
+    select(c(Study.ID,lesions,AI_model,other.grouping,TP,FN,FP,TN,DP,DN,modality,dataset)) %>% 
     drop_na (TP)  %>% 
     drop_na(TN)
 
@@ -18,6 +19,8 @@ sensetivity <- meta::metaprop(
     outclab = "Sensetivity",
     pscale = 100
 )
+summary(sensetivity)
+
 specificity <- meta::metaprop(
     data = df_diag,
     event = TN,
@@ -30,7 +33,8 @@ specificity <- meta::metaprop(
     outclab = "Specificity",
     pscale = 100
 )
-# forest(specificity)
+
+summary(specificity)
 ```
 
 ```{r table_for_forestplot}
@@ -50,9 +54,34 @@ df_plot$"Sensetivity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)", sensetivity$TE*10
 df_plot$"Sen Weight" <- round(sensetivity$w.random*100/sum(sensetivity$w.random),1)
 df_plot$"Specificity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)", specificity$TE*100, specificity$lower*100, specificity$upper*100)
 df_plot$"Spe Weight" <- round(specificity$w.random*100/sum(specificity$w.random),1)
-df_plot$"AI model" <- df_diag$other.grouping
+df_plot$"AI model" <- ifelse(is.na(df_diag$other.grouping),"",df_diag$other.grouping)
 df_plot$lesion <- df_diag$lesions
-df_plot$modality  <- rep("MRI",dim(df_plot)[1])
+df_plot$modality <- df_diag$modality
+df_plot$dataset <- df_diag$dataset
+
+# //STUB - add summary measures
+df_plot_sum <- data.frame(
+    Study = "Total",
+    sen = sensetivity$TE.random,
+    sen_low = sensetivity$lower.random,
+    sen_hi = sensetivity$upper.random,
+    Sensetivity = paste(rep(" ",15),collapse = " "),
+    spe = specificity$TE.random,
+    spe_low = specificity$lower.random,
+    spe_hi = specificity$upper.random,
+    Specificity = paste(rep(" ",15),collapse = " ")
+)
+df_plot_sum$"Sensetivity (95%CI)" <- paste(sprintf("%.2f (%.2f - %.2f)", sensetivity$TE.random*100, sensetivity$lower.random*100, sensetivity$upper.random*100),"\ntau^2 = 0.0128 [0.0080; 0.0469]\nI^2 = 87.0% [81.4%; 91.0%]")
+df_plot_sum$"Sen Weight" <- ""
+df_plot_sum$"Specificity (95%CI)" <- paste(sprintf("%.2f (%.2f - %.2f)", specificity$TE.random*100, specificity$lower.random*100, specificity$upper.random*100),"\ntau^2 = 0.0017 [0.0010; 0.0089]\nI^2 = 90.9% [87.3%; 93.4%]")
+df_plot_sum$"Spe Weight" <- ""
+df_plot_sum$"AI model" <- ""
+df_plot_sum$lesion <- ""
+df_plot_sum$modality <- ""
+df_plot_sum$dataset <- ""
+
+df_plot <- df_plot %>% rbind(df_plot_sum)
+# View(df_plot)
 
 # colnames(df_plot)
 # head(df_diag)
@@ -61,11 +90,15 @@ df_plot$modality  <- rep("MRI",dim(df_plot)[1])
 library(forestploter)
 
 p <- forestploter::forest(
-    df_plot[,c(1,15,14,10,11,5,12,13,9)],
+    df_plot[,c(1,15,14,10,11,5,12,13,9,16,17)],
     est = list(df_plot$sen,df_plot$spe),
     lower = list(df_plot$sen_low,df_plot$spe_low),
     upper = list(df_plot$sen_hi,df_plot$spe_hi),
+    xlim = c(.4,1),
+    ticks_at = c(.4,.6,.8,1),
+    ref_line = c(sensetivity$TE.random,specificity$TE.random),
     ci_column = c(6,9),
+    is_summary = c(rep(FALSE,dim(df_plot)[1]-1),TRUE),
     title = "Sensetivity and Specificity of AI models in diagnosis of shoiulder lesions using MRI\n"
 )
 plot(p)

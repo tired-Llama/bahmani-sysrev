@@ -60,7 +60,7 @@ Model 2: A MultiLayer Perceptron (MLP) model, built to process medical data (cli
 Model 3: A combination of the CNN from Model 1 and the MLP from Model 2, integrating both image and medical data",,522,,,,,,,,,,,0.94,,58,,,,,,,,,,,"Model 1 (CNN): 80.66%
 Model 2 (MLP): 75%
 Model 3 (CNN+MLP): 58%",,,,,,,,,,,,,,
-Cho,,rotator cuff re-tear after artroplasty based on images,580,371,single,"rotator cuff tears, specifically focusing on the supraspinatus tendon. The study also differentiated between full-thickness and partial-thickness tears","VGG16, 
+Cho,,rotator cuff re-tear after artroplasty based on images,580,371,single,"rotator cuff tears, specifically focusing on the supraspinatus tendon.","VGG16, 
 DenseNet, and 
 Xception",,1115,,,,,,,,,0.22,,,,179,,,,,,,"VGG16: 0.80
 DenseNet: 0.84
