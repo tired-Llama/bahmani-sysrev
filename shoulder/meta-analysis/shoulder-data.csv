@@ -6,7 +6,14 @@ extra trees classifier,
 logistic regression, 
 extreme gradient boosting (XGBoost), 
 k-nearest neighbors (KNN) classifier, and 
-CatBoost classifier",,332,,,,,,,,,,,,,142,,,,,"Random forest classifier: 0.35
+CatBoost classifier","random forest
+LightGBM
+decision tree
+extra trees
+logistic regression
+XGBoost
+KNN
+CatBoost",332,,,,,,,,,,,,,142,,,,,"Random forest classifier: 0.35
 LightGBM: 0.24
 Decision tree classifier: 0.19
 Extra trees classifier: 0.26
@@ -78,36 +85,36 @@ Supraspinatus: 99.88±0.15, 99.86±0.17, 99.91±0.12
 Subscapularis: 99.87±0.13, 99.88±0.12, 99.86±0.15",,,,,,,,,,,,,,,,,
 Daher,,,29,14,single,"Rotator cuff tendinopathies, Glenohumeral arthritis, Proximal humeral fractures, Adhesive capsulitis, Acromioclavicular joint trauma/osteoarthritis, Mild inflammation in an intact shoulde",ChatGPT,,,,,,,,,,,,,,,,,,,,,,,,,,"diagnosis in 93% (27/29)
 management in 83% (24/29)",,,,,,,,,,,,,,
-Esfandiari,MRI,,150,-,single,rotator cuff tears,Five different configurations of CNN,,,,,,,,,,,,,,,150,69,6,6,69,0.91,,0.92,0.92,0.5,,0.93,,,,,,,,,,,,,,
+Esfandiari,MRI,,150,-,single,rotator cuff tears,Five different configurations of CNN,CNN,,,,,,,,,,,,,,150,69,6,6,69,0.91,,0.92,0.92,0.5,,0.93,,,,,,,,,,,,,,
 Feuerriegel,,,38,14,single,"Bone pathologies, such as fractures (including Bankart lesions and humerus fractures), bone marrow edema, subchondral cysts, and Hill-Sachs defects. Rotator cuff pathologies, including tendinopathy, partial tears, and complete tears. Rotator cuff muscle pathologies, including fatty infiltration and acute injury. Biceps pathologies, such as tendinopathy and pulley lesions. Cartilage abnormalities. Bursa inflammation. AC joint osteoarthritis. Joint effusion. Labrum lesions and anatomical variants",This algorithm is based on an adaptive-CS-network,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Guo,MRI,,770,361,single,supraspinatus tears (STs,2D CNN,,,,,,,,,,,,,,,143,,,,,0.72,,0.78,0.84,0.35,0.75,0.82,0.88,69,,,,,0.75,,0.91,0.85,0.33,0.82,0.87,0.92
-Guo,MRI,,770,361,single,supraspinatus tears (STs,3D CNN,,,,,,,,,,,,,,,143,,,,,0.68,,0.72,0.82,0.35,0.7,0.78,0.81,69,,,,,0.54,,0.74,0.37,0.33,0.62,0.71,0.78
+Guo,MRI,,770,361,single,supraspinatus tears,2D CNN,2D CNN,,,,,,,,,,,,,,143,,,,,0.72,,0.78,0.84,0.35,0.75,0.82,0.88,69,,,,,0.75,,0.91,0.85,0.33,0.82,0.87,0.92
+Guo,MRI,,770,361,single,supraspinatus tears,3D CNN,3D CNN,,,,,,,,,,,,,,143,,,,,0.68,,0.72,0.82,0.35,0.7,0.78,0.81,69,,,,,0.54,,0.74,0.37,0.33,0.62,0.71,0.78
 Hahn,,,105,60,single,"Subscapularis tendon (SSC), Supraspinatus-infraspinatus tendon (SST-IST), Long head of the biceps brachii tendon (LHBT), Glenoid labrum (GL)","deep learning-based reconstruction (DLR) pipeline (AIR Recon DL, GE Healthcare",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-He,MRI,,384,-,multi,subscapularis muscle injuries,random forest (RF) - T1COOR ,,259,,,,,0.68,0.9,0.77,0.85,0.32,0.72,0.82,0.87,65,,,,,0.76,0.77,0.68,0.83,0.32,0.72,0.77,0.8,60,,,,,0.8,0.86,0.8,0.86,0.42,0.8,0.83,0.82
-He,MRI,,384,-,multi,subscapularis muscle injuries,T2COR,,259,,,,,0.57,0.89,0.77,0.76,0.32,0.66,0.76,0.84,65,,,,,0.73,0.82,0.79,0.78,0.32,0.76,0.78,0.84,60,,,,,0.76,0.77,0.64,0.86,0.42,0.7,0.77,0.79
-He,MRI,,384,-,multi,subscapularis muscle injuries,T2AXI,,259,,,,,0.61,0.92,0.84,0.78,0.32,0.71,0.8,0.89,65,,,,,0.75,0.71,0.54,0.86,0.32,0.63,0.72,0.76,60,,,,,0.88,0.75,0.56,0.94,0.42,0.68,0.78,0.8
-He,MRI,,384,-,multi,subscapularis muscle injuries,T2SAG,,259,,,,,0.67,0.92,0.82,0.83,0.32,0.74,0.83,0.9,65,,,,,0.88,0.72,0.54,0.94,0.32,0.67,0.77,0.82,60,,,,,1,0.78,0.6,1,0.42,0.75,0.83,0.8
-He,MRI,,384,-,multi,subscapularis muscle injuries,Multimodal,,259,,,,,0.72,0.92,0.83,0.86,0.32,0.77,0.85,0.93,65,,,,,0.82,0.84,0.79,0.86,0.32,0.8,0.83,0.92,60,,,,,0.91,0.85,0.76,0.94,0.42,0.83,0.87,0.8
+He,MRI,,384,-,multi,subscapularis muscle injuries,random forest (RF) - T1COOR ,random forest (RF) - T1COOR ,259,,,,,0.68,0.9,0.77,0.85,0.32,0.72,0.82,0.87,65,,,,,0.76,0.77,0.68,0.83,0.32,0.72,0.77,0.8,60,,,,,0.8,0.86,0.8,0.86,0.42,0.8,0.83,0.82
+He,MRI,,384,-,multi,subscapularis muscle injuries,T2COR,T2COR,259,,,,,0.57,0.89,0.77,0.76,0.32,0.66,0.76,0.84,65,,,,,0.73,0.82,0.79,0.78,0.32,0.76,0.78,0.84,60,,,,,0.76,0.77,0.64,0.86,0.42,0.7,0.77,0.79
+He,MRI,,384,-,multi,subscapularis muscle injuries,T2AXI,T2AXI,259,,,,,0.61,0.92,0.84,0.78,0.32,0.71,0.8,0.89,65,,,,,0.75,0.71,0.54,0.86,0.32,0.63,0.72,0.76,60,,,,,0.88,0.75,0.56,0.94,0.42,0.68,0.78,0.8
+He,MRI,,384,-,multi,subscapularis muscle injuries,T2SAG,T2SAG,259,,,,,0.67,0.92,0.82,0.83,0.32,0.74,0.83,0.9,65,,,,,0.88,0.72,0.54,0.94,0.32,0.67,0.77,0.82,60,,,,,1,0.78,0.6,1,0.42,0.75,0.83,0.8
+He,MRI,,384,-,multi,subscapularis muscle injuries,Multimodal,Multimodal,259,,,,,0.72,0.92,0.83,0.86,0.32,0.77,0.85,0.93,65,,,,,0.82,0.84,0.79,0.86,0.32,0.8,0.83,0.92,60,,,,,0.91,0.85,0.76,0.94,0.42,0.83,0.87,0.8
 Hess,,,171,29,multi,rotator cuff tears,nnU-Net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Ho,Sono,,103,67,single,rotator cuff tears,DenseNet121,,,,,,,,,,,,,,,194,133,9,14,38,0.9,,0.94,0.84,0.73,0.92,0.88,0.83,,,,,,,,,,,,,
 Kang,Xray,,4894,1464,single,subscapularis tendon (SSC) tears,multimodal deep learning model,test set 1,,,,,,,,,,,,,,340,76,40,30,194,0.72,0.83,0.66,0.87,0.34,,,0.83,,,,,,,,,,,,,
 Kang,Xray,,4894,1464,single,,,test set 2,,,,,,,,,,,,,,627,147,77,59,344,0.71,0.82,0.66,0.85,0.34,,,0.82,,,,,,,,,,,,,
 Kaniewska,,,30,11,single,"pathologies of the shoulder joint, including the rotator cuff tendons and muscles, glenoid labrum, cartilage, and subacromial bursa",AIR™ Recon DL,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Key - Case 1,MRI,,112,66,single,biceps tendinosis (BT) using transverse MRI,KNN,,,,,,,,,,,,,,,295,,,,,1,,1,1,0.53,1,1,,,,,,,,,,,,,,
-Key - Case 1,MRI,,112,66,single,biceps tendinosis (BT) using transverse MRI,SVM,,,,,,,,,,,,,,,295,,,,,0.99,,1,0.99,0.53,1,1,,,,,,,,,,,,,,
-Key - Case 1,MRI,,112,66,single,biceps tendinosis (BT) using transverse MRI,ANN,,,,,,,,,,,,,,,295,,,,,0.99,,0.99,0.99,0.53,0.99,0.99,,,,,,,,,,,,,,
-Key - Case 2,MRI,,112,66,single,rotator cuff tear (RCT) using sagittal MRI,KNN,,,,,,,,,,,,,,,406,,,,,1,,1,99.43,0.58,1,1,,,,,,,,,,,,,,
-Key - Case 2,MRI,,112,66,single,rotator cuff tear (RCT) using sagittal MRI,SVM,,,,,,,,,,,,,,,406,,,,,0.98,,0.98,0.97,0.58,0.98,0.98,,,,,,,,,,,,,,
-Key - Case 2,MRI,,112,66,single,rotator cuff tear (RCT) using sagittal MRI,ANN,,,,,,,,,,,,,,,406,,,,,0.98,,0.97,0.97,0.58,0.97,0.97,,,,,,,,,,,,,,
-Key - Case 3,MRI,,112,66,single,rotator cuff tear (RCT) using coronal MRI,KNN,,,,,,,,,,,,,,,468,,,,,1,,1,1,0.56,1,1,,,,,,,,,,,,,,
-Key - Case 3,MRI,,112,66,single,rotator cuff tear (RCT) using coronal MRI,SVM,,,,,,,,,,,,,,,468,,,,,0.99,,1,0.99,0.56,0.99,0.99,,,,,,,,,,,,,,
-Key - Case 3,MRI,,112,66,single,rotator cuff tear (RCT) using coronal MRI,ANN,,,,,,,,,,,,,,,468,,,,,0.98,,0.99,0.98,0.56,0.99,0.99,,,,,,,,,,,,,,
+Key - Case 1,MRI,,112,66,single,biceps tendinosis (BT) using transverse MRI,KNN,KNN,,,,,,,,,,,,,,295,,,,,1,,1,1,0.53,1,1,,,,,,,,,,,,,,
+Key - Case 1,MRI,,112,66,single,biceps tendinosis (BT) using transverse MRI,SVM,SVM,,,,,,,,,,,,,,295,,,,,0.99,,1,0.99,0.53,1,1,,,,,,,,,,,,,,
+Key - Case 1,MRI,,112,66,single,biceps tendinosis (BT) using transverse MRI,ANN,ANN,,,,,,,,,,,,,,295,,,,,0.99,,0.99,0.99,0.53,0.99,0.99,,,,,,,,,,,,,,
+Key - Case 2,MRI,,112,66,single,rotator cuff tear (RCT) using sagittal MRI,KNN,KNN,,,,,,,,,,,,,,406,,,,,1,,1,99.43,0.58,1,1,,,,,,,,,,,,,,
+Key - Case 2,MRI,,112,66,single,rotator cuff tear (RCT) using sagittal MRI,SVM,SVM,,,,,,,,,,,,,,406,,,,,0.98,,0.98,0.97,0.58,0.98,0.98,,,,,,,,,,,,,,
+Key - Case 2,MRI,,112,66,single,rotator cuff tear (RCT) using sagittal MRI,ANN,ANN,,,,,,,,,,,,,,406,,,,,0.98,,0.97,0.97,0.58,0.97,0.97,,,,,,,,,,,,,,
+Key - Case 3,MRI,,112,66,single,rotator cuff tear (RCT) using coronal MRI,KNN,KNN,,,,,,,,,,,,,,468,,,,,1,,1,1,0.56,1,1,,,,,,,,,,,,,,
+Key - Case 3,MRI,,112,66,single,rotator cuff tear (RCT) using coronal MRI,SVM,SVM,,,,,,,,,,,,,,468,,,,,0.99,,1,0.99,0.56,0.99,0.99,,,,,,,,,,,,,,
+Key - Case 3,MRI,,112,66,single,rotator cuff tear (RCT) using coronal MRI,ANN,ANN,,,,,,,,,,,,,,468,,,,,0.98,,0.99,0.98,0.56,0.99,0.99,,,,,,,,,,,,,,
 Kim 2020,Xray,,8263,3781,single,rotator cuff tears of the supraspinatus/infraspinatus tendon complex and subscapularis tendon,CNNs,,6113,,,,,,,,,0.31,,,,680,,,,,,,,,0.31,,,,1095,313,88,90,604,0.78,0.87,0.78,0.87,0.37,,,
 Kim 2022,,,56,32,single,rotator cuff tears,2D U-Net and 3D U-Net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Kim 2024,MRI,segmentation study,114,79,multi,rotator cuff muscle and bone,3D nnU-Net architecture,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.91,,0.93,,,,,
 Lee 2023_CSS-Net,,,42,-,single,rotator cuff tears,CSS-Net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Lee 2023_Automated,MRI,segmentation study,303,157,single,full-thickness rotator cuff tears (RCT),3D U-Net convolutional neural network (CNN),,182,,,,,,,,,,,,,61,,,,,0.85,,0.97,0.95,,0.91,,,60,,,,,,,,,,,,
-Lee 2023_Deep learning,MRI,,794,420,single,rotator cuff tears ,YOLO v8,,,,,,,,,,,,,,,1925,,,,,0.98,,0.98,0.91,0.8,0.97,0.96,0.94,,,,,,,,,,,,,
+Lee 2023_Deep learning,MRI,,794,420,single,rotator cuff tears ,YOLO v8,YOLO v8,,,,,,,,,,,,,,1925,,,,,0.98,,0.98,0.91,0.8,0.97,0.96,0.94,,,,,,,,,,,,,
 Lin 2023,MRI,,11925,-,muti,"supraspinotus tendon tears
 infraspinatus tears
 subscapularis",deep learning (DL) ensemble algorithm,,,"10651
@@ -256,8 +263,8 @@ Random forest.
 AdaBoost.
 CatBoost.
 LightGBM",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-shim,MRI,,2124,,single_center,rotator cuff tears,3D convolutional neural network (CNN) based on the Voxception-ResNet (VRN) architecture,,1924,,,,,0.94,,0.94,0.9,0.64,0.94,0.93,,200,,,,,0.94,,0.94,0.9,0.64,0.94,0.93,,,,,,,,,,,,,,
-ro,MRI,,240,,single_center,fatty infiltration of the supraspinatus muscle,fully convolutional deep-learning algorithm,,,,,,,,,,,,,,,240,,,,,,,96.89,99.92,0.77,,99.84,,,,,,,,,,,,,,
+shim,MRI,,2124,,single_center,rotator cuff tears,3D convolutional neural network (CNN) based on the Voxception-ResNet (VRN) architecture,(CNN) based on the Voxception-ResNet,1924,,,,,0.94,,0.94,0.9,0.64,0.94,0.93,,200,,,,,0.94,,0.94,0.9,0.64,0.94,0.93,,,,,,,,,,,,,,
+ro,MRI,,240,,single_center,fatty infiltration of the supraspinatus muscle,fully convolutional deep-learning algorithm,-,,,,,,,,,,,,,,240,,,,,,,96.89,99.92,0.77,,99.84,,,,,,,,,,,,,,
 oeding_supplementary,,,,,single_center,subscapularis tendon tears,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 oeding,MRI,,202,87,single_center,partial or full-thickness tears of the subscapularis tendon,XGBoost algorithm,,161,,,,,,,,,0.6,,,,41,,,,,,,,,0.6,0.87,0.85,0.84,,,,,,,,,,,,,
 obama,,,30,10,single_center,shoulder diseases,deep learning reconstruction (DLR) method called Advanced intelligent Clear-IQ Engine (AiCE),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

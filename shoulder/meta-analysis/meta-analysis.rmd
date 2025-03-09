@@ -3,8 +3,9 @@ df_meta <- df_test
 df_diag <- df_meta  %>% 
     mutate(DP = TP+FN, DN = FP+TN) %>% 
     select(c(Study.ID,lesions,AI_model,other.grouping,TP,FN,FP,TN,DP,DN)) %>% 
-    drop_na (TP)
-    
+    drop_na (TP)  %>% 
+    drop_na(TN)
+
 sensetivity <- meta::metaprop(
     data = df_diag,
     event = TP,
@@ -16,8 +17,56 @@ sensetivity <- meta::metaprop(
     title = "sensetivity",
     outclab = "Sensetivity",
     pscale = 100
-    )
+)
+specificity <- meta::metaprop(
+    data = df_diag,
+    event = TN,
+    n = DN,
+    sm = "PRAW",
+    studlab = Study.ID,
+    common = FALSE,
+    random = TRUE,
+    title = "Specificity",
+    outclab = "Specificity",
+    pscale = 100
+)
+# forest(specificity)
+```
 
-# summary(sensetivity)
-forest(sensetivity)
+```{r table_for_forestplot}
+df_plot <- data.frame(
+    Study = sensetivity$studlab,
+    sen = sensetivity$TE,
+    sen_low = sensetivity$lower,
+    sen_hi = sensetivity$upper,
+    Sensetivity = paste(rep(" ",15),collapse = " "),
+    spe = specificity$TE,
+    spe_low = specificity$lower,
+    spe_hi = specificity$upper,
+    Specificity = paste(rep(" ",15),collapse = " ")
+)
+
+df_plot$"Sensetivity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)", sensetivity$TE*100, sensetivity$lower*100, sensetivity$upper*100)
+df_plot$"Sen Weight" <- round(sensetivity$w.random*100/sum(sensetivity$w.random),1)
+df_plot$"Specificity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)", specificity$TE*100, specificity$lower*100, specificity$upper*100)
+df_plot$"Spe Weight" <- round(specificity$w.random*100/sum(specificity$w.random),1)
+df_plot$"AI model" <- df_diag$other.grouping
+df_plot$lesion <- df_diag$lesions
+df_plot$modality  <- rep("MRI",dim(df_plot)[1])
+
+# colnames(df_plot)
+# head(df_diag)
+```
+```{r forest_plots}
+library(forestploter)
+
+p <- forestploter::forest(
+    df_plot[,c(1,15,14,10,11,5,12,13,9)],
+    est = list(df_plot$sen,df_plot$spe),
+    lower = list(df_plot$sen_low,df_plot$spe_low),
+    upper = list(df_plot$sen_hi,df_plot$spe_hi),
+    ci_column = c(6,9),
+    title = "Sensetivity and Specificity of AI models in diagnosis of shoiulder lesions using MRI\n"
+)
+plot(p)
 ```

@@ -48,4 +48,5 @@ df_test <- df %>%
     mutate(TN = ifelse(is.na(test_True_negatives),round(test_N_image*test_specificity*test_prevalence_of_lesion_in_training_dataset),test_True_negatives))
 
 # View(df_test)
+# colnames(df_test)
 ```
