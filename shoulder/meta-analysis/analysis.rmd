@@ -11,5 +11,6 @@ source_rmd("shoulder/meta-analysis/data preperation and cleaning.rmd")
 
 export_status = FALSE
 export_path = "meta-analysis/output/"
+# get_wh(p)
 source_rmd("shoulder/meta-analysis/meta-analysis.rmd")
 ```

@@ -60,7 +60,7 @@ Model 2: A MultiLayer Perceptron (MLP) model, built to process medical data (cli
 Model 3: A combination of the CNN from Model 1 and the MLP from Model 2, integrating both image and medical data",,522,,,,,,,,,,,0.94,,58,,,,,,,,,,,"Model 1 (CNN): 80.66%
 Model 2 (MLP): 75%
 Model 3 (CNN+MLP): 58%",,,,,,,,,,,,,,
-Cho,,rotator cuff re-tear after artroplasty based on images,580,371,single,"rotator cuff tears, specifically focusing on the supraspinatus tendon.","VGG16, 
+Cho,,rotator cuff re-tear after artroplasty based on images,580,371,single,rotator cuff tears,"VGG16, 
 DenseNet, and 
 Xception",,1115,,,,,,,,,0.22,,,,179,,,,,,,"VGG16: 0.80
 DenseNet: 0.84
@@ -109,7 +109,7 @@ Key - Case 2,MRI,,112,66,single,rotator cuff tear (RCT) using sagittal MRI,ANN,A
 Key - Case 3,MRI,,112,66,single,rotator cuff tear (RCT) using coronal MRI,KNN,KNN,,,,,,,,,,,,,,468,,,,,1,,1,1,0.56,1,1,,,,,,,,,,,,,,
 Key - Case 3,MRI,,112,66,single,rotator cuff tear (RCT) using coronal MRI,SVM,SVM,,,,,,,,,,,,,,468,,,,,0.99,,1,0.99,0.56,0.99,0.99,,,,,,,,,,,,,,
 Key - Case 3,MRI,,112,66,single,rotator cuff tear (RCT) using coronal MRI,ANN,ANN,,,,,,,,,,,,,,468,,,,,0.98,,0.99,0.98,0.56,0.99,0.99,,,,,,,,,,,,,,
-Kim 2020,Xray,,8263,3781,single,rotator cuff tears of the supraspinatus/infraspinatus tendon complex and subscapularis tendon,CNNs,,6113,,,,,,,,,0.31,,,,680,,,,,,,,,0.31,,,,1095,313,88,90,604,0.78,0.87,0.78,0.87,0.37,,,
+Kim 2020,Xray,,8263,3781,single,rotator cuff tears,CNNs,,6113,,,,,,,,,0.31,,,,680,,,,,,,,,0.31,,,,1095,313,88,90,604,0.78,0.87,0.78,0.87,0.37,,,
 Kim 2022,,,56,32,single,rotator cuff tears,2D U-Net and 3D U-Net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Kim 2024,MRI,segmentation study,114,79,multi,rotator cuff muscle and bone,3D nnU-Net architecture,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.91,,0.93,,,,,
 Lee 2023_CSS-Net,,,42,-,single,rotator cuff tears,CSS-Net,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
