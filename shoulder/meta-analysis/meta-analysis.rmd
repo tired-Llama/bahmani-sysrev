@@ -1,0 +1,23 @@
+```{r}
+df_meta <- df_test
+df_diag <- df_meta  %>% 
+    mutate(DP = TP+FN, DN = FP+TN) %>% 
+    select(c(Study.ID,lesions,AI_model,other.grouping,TP,FN,FP,TN,DP,DN)) %>% 
+    drop_na (TP)
+    
+sensetivity <- meta::metaprop(
+    data = df_diag,
+    event = TP,
+    n = DP,
+    sm = "PRAW",
+    studlab = Study.ID,
+    common = FALSE,
+    random = TRUE,
+    title = "sensetivity",
+    outclab = "Sensetivity",
+    pscale = 100
+    )
+
+# summary(sensetivity)
+forest(sensetivity)
+```

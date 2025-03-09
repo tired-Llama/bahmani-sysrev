@@ -8,4 +8,8 @@ source_rmd = function(file, ...) {
 ```
 ```{r}
 source_rmd("shoulder/meta-analysis/data preperation and cleaning.rmd")
+
+export_status = FALSE
+export_path = "meta-analysis/output/"
+source_rmd("shoulder/meta-analysis/meta-analysis.rmd")
 ```
