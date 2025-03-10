@@ -9,8 +9,8 @@ source_rmd = function(file, ...) {
 ```{r}
 source_rmd("shoulder/meta-analysis/data preperation and cleaning.rmd")
 
-export_status = FALSE
-export_path = "meta-analysis/output/"
-# get_wh(p)
+export_status = TRUE
+export_path = "shoulder/meta-analysis/output/"
+# get_wh(p,unit="cm")
 source_rmd("shoulder/meta-analysis/meta-analysis.rmd")
 ```

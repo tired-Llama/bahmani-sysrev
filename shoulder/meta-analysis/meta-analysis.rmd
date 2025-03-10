@@ -1,11 +1,15 @@
 ```{r}
 df_meta <- df_all
-# df_meta$other.grouping[31] <- "(CNN) based on the\nVoxception-ResNet"
+
+df_meta$other.grouping[c(6,41,84,127)] <- "(CNN) based on the\nVoxception-ResNet"
+
 df_diag <- df_meta  %>% 
     mutate(DP = TP+FN, DN = FP+TN) %>% 
     select(c(Study.ID,lesions,AI_model,other.grouping,TP,FN,FP,TN,DP,DN,modality,dataset)) %>% 
     drop_na (TP)  %>% 
-    drop_na(TN)
+    drop_na(TN) %>% 
+    mutate_all(~ifelse(is.na(.),"",.)) %>% 
+    mutate(across(seq(5,10),as.double))
 
 sensetivity <- meta::metaprop(
     data = df_diag,
@@ -56,7 +60,7 @@ df_plot$"Sensetivity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)", sensetivity$TE*10
 df_plot$"Weight" <- round(sensetivity$w.random*100/sum(sensetivity$w.random),1)
 df_plot$"Specificity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)", specificity$TE*100, specificity$lower*100, specificity$upper*100)
 df_plot$" Weight" <- round(specificity$w.random*100/sum(specificity$w.random),1)
-df_plot$"AI model" <- ifelse(is.na(df_diag$other.grouping),"",df_diag$other.grouping)
+df_plot$"AI model" <- df_diag$other.grouping
 df_plot$lesion <- df_diag$lesions
 df_plot$modality <- df_diag$modality
 df_plot$dataset <- sensetivity$subgroup
@@ -64,7 +68,7 @@ df_plot$dataset <- sensetivity$subgroup
 ```{r subgroup_rows}
 df_sgp <- data.frame(
     row.names = c(1:3), 
-    Study = c("training","validation","test"),
+    Study = "",
     sen=sensetivity$TE.random.w,
     sen_low=sensetivity$lower.random.w,
     sen_hi=sensetivity$upper.random.w,
@@ -82,7 +86,7 @@ df_sgp$" Weight" <- round(specificity$w.random.w*100/sum(specificity$w.random.w)
 df_sgp$"AI model" <- ""
 df_sgp$lesion <- ""
 df_sgp$modality <- ""
-df_sgp$dataset <- ""
+df_sgp$dataset <- c("training","validation","test")
 
 # df_sgp
 ```
@@ -99,19 +103,20 @@ df_plot_sum <- data.frame(
     spe_hi = specificity$upper.random,
     Specificity = paste(rep(" ",15),collapse = " ")
 )
-df_plot_sum$"Sensetivity (95%CI)" <- paste(sprintf("%.2f (%.2f - %.2f)", sensetivity$TE.random*100, sensetivity$lower.random*100, sensetivity$upper.random*100),"\ntau^2 = 0.0128 [0.0080; 0.0469]\nI^2 = 87.0% [81.4%; 91.0%]")
+df_plot_sum$"Sensetivity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)\n I^2 = %.2f (%.2f - %.2f)", sensetivity$TE.random*100, sensetivity$lower.random*100, sensetivity$upper.random*100,sensetivity$I2,sensetivity$lower.I2,sensetivity$upper.I2)
 df_plot_sum$"Weight" <- ""
-df_plot_sum$"Specificity (95%CI)" <- paste(sprintf("%.2f (%.2f - %.2f)", specificity$TE.random*100, specificity$lower.random*100, specificity$upper.random*100),"\ntau^2 = 0.0017 [0.0010; 0.0089]\nI^2 = 90.9% [87.3%; 93.4%]")
+df_plot_sum$"Specificity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)\n I^2 = %.2f (%.2f - %.2f)", specificity$TE.random*100, specificity$lower.random*100, specificity$upper.random*100,specificity$I2,specificity$lower.I2,specificity$upper.I2)
 df_plot_sum$" Weight" <- ""
 df_plot_sum$"AI model" <- ""
 df_plot_sum$lesion <- ""
 df_plot_sum$modality <- ""
 df_plot_sum$dataset <- ""
-
+```
+```{r merge_dataframes}
 df_plot <- df_plot %>% rbind(df_sgp) %>% rbind(df_plot_sum)
 # View(df_plot)
 
-# colnames(df_plot)
+colnames(df_plot)
 # head(df_diag)
 ```
 
@@ -119,14 +124,14 @@ df_plot <- df_plot %>% rbind(df_sgp) %>% rbind(df_plot_sum)
 library(forestploter)
 
 p <- forestploter::forest(
-    df_plot[,c(1,15,14,10,11,5,12,13,9,16,17)],
+    df_plot[,c(1,17,16,15,14,10,11,5,12,13,9)],
     est = list(df_plot$sen,df_plot$spe),
     lower = list(df_plot$sen_low,df_plot$spe_low),
     upper = list(df_plot$sen_hi,df_plot$spe_hi),
     xlim = c(.4,1),
     ticks_at = c(.4,.6,.8,1),
     ref_line = c(sensetivity$TE.random,specificity$TE.random),
-    ci_column = c(6,9),
+    ci_column = c(8,11),
     is_summary = c(rep(FALSE,dim(df_plot)[1]-4),rep(TRUE,4)),
     title = "Sensetivity and Specificity of AI models in diagnosis of shoiulder lesions using MRI\n"
 )
@@ -139,6 +144,45 @@ p <- add_border(
     where = c("bottom"),
     gp = gpar(lwd = 2)
 )
+```
 
-plot(p)
+```{r}
+name <- "sensetivity and specificity.jpg"
+size <- get_wh(p,unit = "cm")
+if(export_status){
+    jpeg(file = paste(export_path,name,sep=""),width = size[1],height = size[2],units = "cm",res = 300)
+    plot(p)
+    dev.off()
+}else {
+   plot(p)
+}
+```
+## meta-analysis of Diagnostic odds ratio
+```{r}
+library(mada)
+df_mada  <- df_diag %>% 
+    mutate(names = Study.ID) %>% 
+    select(c(names, TP,FN,FP,TN))
+head(df_mada)
+m  <-  mada::madauni(
+    df_mada,
+    type = "DOR",
+    method = "DSL",
+    suppress = FALSE
+)
+m0 <- m$descr
+m1 <- m$descr$DOR
+nm <- m0$names
+te <- log(m1$DOR)
+se <- m1$se.lnDOR
+DOR <- meta::metagen(
+    TE = te,
+    seTE = se,
+    sm = "DOR",
+    method.tau = "DL",
+    studlab = nm,
+    common = FALSE
+)
+# summary(DOR)
+meta::forest(DOR,leftlabs=c("study","ln(DOR)","ln(se.DOR)"))
 ```
