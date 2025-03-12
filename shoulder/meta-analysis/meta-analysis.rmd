@@ -177,6 +177,7 @@ mDOR <- meta::metagen(
     method.tau = "DL",
     subgroup = df_diag$dataset,
     studlab = nm,
+    title = "Diognastic Odds Ratio ",
     common = FALSE
 )
 
@@ -200,7 +201,7 @@ mAccu <- meta::metaprop(
 ```
 ```{r "Database for DOR plot"}
 df_plot <- data.frame(
-    Study = DOR$studlab
+    Study = mDOR$studlab
 )
 df_plot$Dataset <- df_diag$dataset
 df_plot$Modality <- df_diag$modality
@@ -298,5 +299,16 @@ if(export_status){
     dev.off()
 }else{
     plot(p2)
+}
+```
+```{r "report the summaries"}
+if(export_summary){
+    name = "meta-analysis results.pdf"
+    sink(file =paste(export_path,name,sep = ""),type = "output")
+    print(summary(sensetivity))
+    print(summary(specificity))
+    print(summary(mDOR))
+    print(summary(mAccu))
+    sink()
 }
 ```
