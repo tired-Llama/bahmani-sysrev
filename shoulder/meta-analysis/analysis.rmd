@@ -1,0 +1,21 @@
+```{r}
+source_rmd = function(file, ...) {
+  tmp_file = tempfile(fileext=".R")
+  on.exit(unlink(tmp_file), add = TRUE)
+  knitr::purl(file, output=tmp_file)
+  source(file = tmp_file, ...)
+}
+```
+```{r}
+source_rmd("shoulder/meta-analysis/data preperation and cleaning.rmd")
+
+export_status = FALSE
+export_summary = FALSE
+export_path = "shoulder/meta-analysis/output/"
+# get_wh(p,unit="cm")
+source_rmd("shoulder/meta-analysis/meta-analysis.rmd")
+```
+```{r}
+name  <- "meta-analysis data.csv"
+write.csv(df_diag,paste(export_path,name,sep = ""))
+```

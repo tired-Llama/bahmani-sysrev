@@ -1,0 +1,95 @@
+```{r load_packages}
+library(tidyverse)
+library(grid)
+library(meta)
+library(metafor)
+library(ggplot2)
+```
+```{r custom_functions}
+substudies <- function(data,sep = "\n"){
+    data %>% 
+    mutate_all(.funs = ~str_trim(.)) %>%    # remove leading and trailing white spaces
+    mutate_all(.funs = ~strsplit(.,split = sep)) %>%    # split all columns
+    unnest_longer(col = colnames(data),keep_empty = TRUE) %>% 
+    mutate_all(.funs = ~sub(pattern = "±.*",replacement = "",.)) %>%   #   remove leading characters after "±"
+    mutate_all(.funs = ~sub(pattern = ".*:",replacement = "",.)) %>%    #   remove leading characters before colon
+    mutate_all(.funs = ~sub(pattern = ".*=",replacement = "",.))    #   remove leading characters before "="
+}
+```
+```{r load_data}
+data <- read.csv("shoulder/meta-analysis/shoulder-data.csv")
+# //NOTE - extracted data is based on optimal cutoff of the tests and not the 95%!!
+excluded_no_reporting <- c("Hahn","Allaart","Daher","Feuerriegel","Hess", "Kaniewska", "Kim 2022","Lee 2023_CSS-Net","xia","shinohara","oeding_supplementary","obama","ni","Lin 2014", "Medina")
+excluded_not_classification <- c("Conze","Kim 2024","Lee 2023_Automated","kim 2019", "mu")
+excluded_ambiguous <- c("Nia")
+df <- data  %>% 
+    select(-c(n_female,N)) %>% 
+    filter(is.na(Study.ID)==FALSE) %>% 
+    filter(!(Study.ID %in% excluded_no_reporting)) %>% 
+    filter(!(Study.ID %in% excluded_not_classification)) %>% 
+    filter (!(Study.ID %in% excluded_ambiguous)) %>% 
+    substudies()  %>% 
+    mutate(across(seq(8,46),as.double))
+
+# View(df)
+# glimpse(df)
+colnames(df)
+```
+```{r create_data_structures}
+df_test <- df %>% 
+    select(-matches("^training_")) %>%  #   remove columns with data on model training
+    select(-matches("^validation_")) %>%  #   remove columns with data on model validation
+    # filter(modality == "MRI") %>% 
+    mutate(across(seq(13,20),~ifelse(.>1,./100,.))) %>% 
+    mutate(dataset = "test") %>% 
+    # //STUB - calculate the missing data
+    mutate(TP = ifelse(is.na(test_True_positives),round(test_N_image*test_sensetivity*test_prevalence_of_lesion_in_training_dataset),test_True_positives)) %>% 
+    mutate(FN = ifelse(is.na(test_False_Negatives),round(test_N_image*(1-test_sensetivity)*test_prevalence_of_lesion_in_training_dataset),test_False_Negatives)) %>% 
+    mutate(FP = ifelse(is.na(test_False_positives),round(test_N_image*(1-test_specificity)*test_prevalence_of_lesion_in_training_dataset),test_False_positives)) %>% 
+    mutate(TN = ifelse(is.na(test_True_negatives),round(test_N_image*test_specificity*test_prevalence_of_lesion_in_training_dataset),test_True_negatives)) %>% 
+    # //STUB - acuuracy and AUC
+    mutate(N = test_N_image) %>% 
+    mutate(AUC = test_ROC.AUC) %>% 
+    mutate(Accuracy = test_Accuracy) %>%
+    select(-matches("^test_"))  #   remove columns with data on model test
+
+df_train <- df %>% 
+    select(-matches("^test_")) %>%  #   remove columns with data on model test
+    select(-matches("^validation_")) %>%  #   remove columns with data on model validation
+    # filter(modality == "MRI") %>% 
+    mutate(across(seq(13,20),~ifelse(.>1,./100,.))) %>% 
+    mutate(dataset = "training") %>% 
+    # //STUB - calculate the missing data
+    mutate(TP = ifelse(is.na(training_True_positives),round(training_N_image*training_sensetivity*training_prevalence_of_lesion_in_training_dataset),training_True_positives)) %>% 
+    mutate(FN = ifelse(is.na(training_False_Negatives),round(training_N_image*(1-training_sensetivity)*training_prevalence_of_lesion_in_training_dataset),training_False_Negatives)) %>% 
+    mutate(FP = ifelse(is.na(training_False_positives),round(training_N_image*(1-training_specificity)*training_prevalence_of_lesion_in_training_dataset),training_False_positives)) %>% 
+    mutate(TN = ifelse(is.na(training_True_negatives),round(training_N_image*training_specificity*training_prevalence_of_lesion_in_training_dataset),training_True_negatives)) %>% 
+    # //STUB - acuuracy and AUC
+    mutate(N = training_N_image) %>% 
+    mutate(AUC = training_ROC.AUC) %>% 
+    mutate(Accuracy = training_Accuracy) %>%
+    select(-matches("^training_"))  #   remove columns with data on model training
+
+df_validation <- df %>% 
+    select(-matches("^training_")) %>%  #   remove columns with data on model training
+    select(-matches("^test_")) %>%  #   remove columns with data on model test
+    # filter(modality == "MRI") %>% 
+    mutate(across(seq(13,20),~ifelse(.>1,./100,.))) %>% 
+    mutate(dataset = "validation") %>% 
+    # //STUB - calculate the missing data
+    mutate(TP = ifelse(is.na(validation_True_positives),round(validation_N_image*validation_sensetivity*validation_prevalence_of_lesion_in_training_dataset),validation_True_positives)) %>% 
+    mutate(FN = ifelse(is.na(validation_False_Negatives),round(validation_N_image*(1-validation_sensetivity)*validation_prevalence_of_lesion_in_training_dataset),validation_False_Negatives)) %>% 
+    mutate(FP = ifelse(is.na(validation_False_positives),round(validation_N_image*(1-validation_specificity)*validation_prevalence_of_lesion_in_training_dataset),validation_False_positives)) %>% 
+    mutate(TN = ifelse(is.na(validation_True_negatives),round(validation_N_image*validation_specificity*validation_prevalence_of_lesion_in_training_dataset),validation_True_negatives)) %>% 
+    # //STUB - acuuracy and AUC
+    mutate(N = validation_N_image) %>% 
+    mutate(AUC = validation_ROC.AUC) %>% 
+    mutate(Accuracy = validation_Accuracy) %>% 
+    select(-matches("^validation_"))  #   remove columns with data on model validation
+
+df_all <- df_train %>% rbind(df_validation) %>% rbind(df_test)
+# View(df_test)
+# colnames(df_train)
+# colnames(df_validation)
+# colnames(df_test)
+```

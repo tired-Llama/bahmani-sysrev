@@ -1,0 +1,354 @@
+Review:     sensetivity
+Outcome:    Sensetivity
+
+                         events              95%-CI %W(random)    dataset
+He                      77.1084 [66.5830;  85.6196]        2.6   training
+He                      77.1084 [66.5830;  85.6196]        2.6   training
+He                      84.3373 [74.7067;  91.3881]        2.7   training
+He                      81.9277 [71.9502;  89.5172]        2.6   training
+He                      83.1325 [73.3216;  90.4600]        2.7   training
+shim                    93.9886 [92.5118;  95.2506]        2.9   training
+Guo                     91.3043 [71.9621;  98.9290]        2.4 validation
+Guo                     73.9130 [51.5948;  89.7714]        1.9 validation
+He                      80.0000 [59.2963;  93.1689]        2.1 validation
+He                      64.0000 [42.5206;  82.0283]        1.8 validation
+He                      56.0000 [34.9282;  75.5976]        1.8 validation
+He                      60.0000 [38.6653;  78.8745]        1.8 validation
+He                      76.0000 [54.8712;  90.6436]        2.0 validation
+Kim 2020                78.0549 [73.6796;  82.0104]        2.9 validation
+Cho                     80.0000 [64.3522;  90.9478]        2.3       test
+Cho                     84.6154 [69.4720;  94.1376]        2.4       test
+Cho                     84.6154 [69.4720;  94.1376]        2.4       test
+Esfandiari              92.0000 [83.3963;  97.0075]        2.8       test
+Guo                     78.0000 [64.0388;  88.4734]        2.4       test
+Guo                     72.0000 [57.5095;  83.7689]        2.3       test
+He                      66.6667 [43.0325;  85.4123]        1.7       test
+He                      80.0000 [56.3386;  94.2666]        1.9       test
+He                      52.3810 [29.7807;  74.2869]        1.7       test
+He                      52.3810 [29.7807;  74.2869]        1.7       test
+He                      80.0000 [56.3386;  94.2666]        1.9       test
+Ho                      93.6620 [88.3095;  97.0612]        2.9       test
+Kang                    65.5172 [56.1250;  74.0959]        2.6       test
+Kang                    65.6250 [59.0064;  71.8237]        2.8       test
+Key - Case 1           100.0000 [97.6631; 100.0000]        3.0       test
+Key - Case 1           100.0000 [97.6631; 100.0000]        3.0       test
+Key - Case 1            98.7261 [95.4742;  99.8454]        2.9       test
+Key - Case 2           100.0000 [98.4425; 100.0000]        3.0       test
+Key - Case 2            97.8814 [95.1253;  99.3086]        2.9       test
+Key - Case 2            97.0213 [93.9593;  98.7942]        2.9       test
+Key - Case 3           100.0000 [98.6019; 100.0000]        3.0       test
+Key - Case 3           100.0000 [98.6019; 100.0000]        3.0       test
+Key - Case 3            98.8550 [96.6904;  99.7632]        2.9       test
+Lee 2023_Deep learning  97.9870 [97.1548;  98.6283]        3.0       test
+shim                    93.7500 [88.0563;  97.2633]        2.9       test
+ro                      96.7568 [93.0748;  98.8007]        2.9       test
+
+Number of studies: k = 40
+Number of observations: o = 6910
+Number of events: e = 6345
+
+                      events             95%-CI
+Random effects model 84.7420 [80.5978; 88.8861]
+
+Quantifying heterogeneity (with 95%-CIs):
+ tau^2 = 0.0151 [0.0097; 0.0292]; tau = 0.1229 [0.0983; 0.1709]
+ I^2 = 94.2% [93.0%; 95.3%]; H = 4.16 [3.77; 4.60]
+
+Test of heterogeneity:
+      Q d.f.  p-value
+ 675.60   39 < 0.0001
+
+Results for subgroups (random effects model):
+                       k  events             95%-CI  tau^2    tau      Q   I^2
+dataset = training     6 83.8124 [77.9704; 89.6544] 0.0039 0.0623  42.75 88.3%
+dataset = validation   8 74.3954 [66.4977; 82.2932] 0.0071 0.0843  15.73 55.5%
+dataset = test        26 87.7529 [82.5044; 93.0015] 0.0164 0.1282 349.57 92.8%
+
+Test for subgroup differences (random effects model):
+                  Q d.f. p-value
+Between groups 7.62    2  0.0221
+
+Details of meta-analysis methods:
+- Inverse variance method
+- Restricted maximum-likelihood estimator for tau^2
+- Q-Profile method for confidence interval of tau^2 and tau
+- Calculation of I^2 based on Q
+- Untransformed proportions
+- Clopper-Pearson confidence interval for individual studies
+- Continuity correction of 0.5 in studies with zero cell frequencies
+- Events per 100 observations
+Review:     Specificity
+Outcome:    Specificity
+
+                         events              95%-CI %W(random)    dataset
+He                      85.3659 [75.8320;  92.2032]        2.6   training
+He                      75.9036 [65.2674;  84.6176]        2.4   training
+He                      78.3133 [67.9085;  86.6113]        2.4   training
+He                      83.1325 [73.3216;  90.4600]        2.5   training
+He                      85.5422 [76.1066;  92.3001]        2.6   training
+shim                    90.0081 [88.1955;  91.6269]        3.1   training
+Guo                     86.3636 [65.0878;  97.0944]        1.7 validation
+Guo                     36.3636 [17.1979;  59.3423]        1.2 validation
+He                      84.6154 [65.1321;  95.6437]        1.8 validation
+He                      84.6154 [65.1321;  95.6437]        1.8 validation
+He                      92.3077 [74.8697;  99.0545]        2.2 validation
+He                     100.0000 [86.2815; 100.0000]        2.8 validation
+He                      92.3077 [74.8697;  99.0545]        2.2 validation
+Kim 2020                87.0317 [84.3021;  89.4415]        3.1 validation
+Cho                     70.0000 [53.4684;  83.4373]        1.7       test
+Cho                     92.5000 [79.6135;  98.4258]        2.5       test
+Cho                     89.7436 [75.7790;  97.1340]        2.3       test
+Esfandiari              92.0000 [83.3963;  97.0075]        2.7       test
+Guo                     84.0000 [70.8874;  92.8299]        2.2       test
+Guo                     82.0000 [68.5631;  91.4238]        2.2       test
+He                      80.9524 [58.0934;  94.5536]        1.5       test
+He                      76.1905 [52.8340;  91.7824]        1.3       test
+He                      85.7143 [63.6576;  96.9511]        1.7       test
+He                      95.2381 [76.1840;  99.8795]        2.4       test
+He                      85.7143 [63.6576;  96.9511]        1.7       test
+Ho                      73.0769 [58.9757;  84.4317]        2.0       test
+Kang                    86.6071 [81.4359;  90.7781]        2.9       test
+Kang                    85.3598 [81.5252;  88.6647]        3.0       test
+Key - Case 1           100.0000 [97.6631; 100.0000]        3.2       test
+Key - Case 1            98.7261 [95.4742;  99.8454]        3.1       test
+Key - Case 1            98.7261 [95.4742;  99.8454]        3.1       test
+Key - Case 2            99.5745 [97.6520;  99.9892]        3.2       test
+Key - Case 2            97.0213 [93.9593;  98.7942]        3.1       test
+Key - Case 2            97.0213 [93.9593;  98.7942]        3.1       test
+Key - Case 3           100.0000 [98.6019; 100.0000]        3.2       test
+Key - Case 3            98.8550 [96.6904;  99.7632]        3.1       test
+Key - Case 3            98.0916 [95.6029;  99.3775]        3.1       test
+Lee 2023_Deep learning  90.9740 [89.4311;  92.3585]        3.1       test
+shim                    89.8438 [83.2588;  94.4805]        2.9       test
+ro                     100.0000 [98.0258; 100.0000]        3.2       test
+
+Number of studies: k = 40
+Number of observations: o = 7404
+Number of events: e = 6746
+
+                      events             95%-CI
+Random effects model 89.7141 [86.9224; 92.5058]
+
+Quantifying heterogeneity (with 95%-CIs):
+ tau^2 = 0.0064 [0.0046; 0.0167]; tau = 0.0800 [0.0675; 0.1291]
+ I^2 = 94.0% [92.7%; 95.1%]; H = 4.09 [3.69; 4.52]
+
+Test of heterogeneity:
+      Q d.f.  p-value
+ 651.40   39 < 0.0001
+
+Results for subgroups (random effects model):
+                       k  events             95%-CI  tau^2    tau      Q   I^2
+dataset = training     6 84.1225 [79.5761; 88.6690] 0.0019 0.0438  18.28 72.6%
+dataset = validation   8 84.4731 [72.9285; 96.0176] 0.0240 0.1550  47.07 85.1%
+dataset = test        26 92.4416 [89.5751; 95.3081] 0.0043 0.0656 337.21 92.6%
+
+Test for subgroup differences (random effects model):
+                   Q d.f. p-value
+Between groups 10.07    2  0.0065
+
+Details of meta-analysis methods:
+- Inverse variance method
+- Restricted maximum-likelihood estimator for tau^2
+- Q-Profile method for confidence interval of tau^2 and tau
+- Calculation of I^2 based on Q
+- Untransformed proportions
+- Clopper-Pearson confidence interval for individual studies
+- Continuity correction of 0.5 in studies with zero cell frequencies
+- Events per 100 observations
+Review:     Diognastic Odds Ratio 
+
+                               DOR                     95%-CI %W(random)
+He                         18.6554 [   8.4975;       40.9558]        2.9
+He                         10.2458 [   5.0361;       20.8448]        2.9
+He                         18.4895 [   8.4924;       40.2551]        2.9
+He                         21.1824 [   9.6134;       46.6738]        2.9
+He                         27.4166 [  12.0104;       62.5848]        2.9
+shim                      139.4548 [ 103.4051;      188.0723]        3.0
+Guo                        47.9143 [   8.4531;      271.5904]        2.4
+Guo                         1.5782 [   0.4586;        5.4313]        2.7
+He                         18.6364 [   4.6786;       74.2341]        2.6
+He                          8.6842 [   2.3929;       31.5169]        2.6
+He                         12.3565 [   2.7186;       56.1616]        2.5
+He                         75.2857 [   4.1160;     1377.0601]        1.7
+He                         29.4000 [   6.0846;      142.0574]        2.5
+Kim 2020                   23.6615 [  17.1268;       32.6895]        3.0
+Cho                         8.7176 [   3.1875;       23.8420]        2.8
+Cho                        55.2198 [  13.8858;      219.5936]        2.6
+Cho                        40.6581 [  11.1771;      147.8988]        2.6
+Esfandiari                114.3254 [  36.6771;      356.3614]        2.7
+Guo                        17.1739 [   6.4024;       46.0677]        2.8
+Guo                        10.9964 [   4.3335;       27.9034]        2.8
+He                          7.5185 [   1.9292;       29.3011]        2.6
+He                         11.0000 [   2.6576;       45.5297]        2.6
+He                          5.7891 [   1.4049;       23.8550]        2.6
+He                         14.9683 [   2.3373;       95.8591]        2.3
+He                         19.3810 [   4.1280;       90.9942]        2.5
+Ho                         37.3122 [  15.2732;       91.1532]        2.8
+Kang                       12.0455 [   7.0249;       20.6543]        3.0
+Kang                       11.0195 [   7.4683;       16.2594]        3.0
+Key - Case 1            97969.0000 [1931.8271;  4968314.5828]        1.2
+Key - Case 1            19468.6000 [ 927.1319;   408816.0443]        1.6
+Key - Case 1             3868.8400 [ 660.9176;    22647.1862]        2.3
+Key - Case 2            73633.0000 [2984.3507;  1816749.8491]        1.5
+Key - Case 2             1282.3697 [ 420.3537;     3912.1153]        2.7
+Key - Case 2              928.2178 [ 331.8454;     2596.3545]        2.8
+Key - Case 3           275625.0000 [5448.7258; 13942551.5273]        1.2
+Key - Case 3            38925.0000 [2000.6791;   757320.6712]        1.7
+Key - Case 3             3471.2338 [ 898.8087;    13406.0383]        2.6
+Lee 2023_Deep learning    481.4392 [ 324.8509;      713.5079]        3.0
+shim                      121.2876 [  49.5424;      296.9314]        2.8
+ro                      10245.3077 [ 572.9646;   183198.6336]        1.7
+                          dataset
+He                       training
+He                       training
+He                       training
+He                       training
+He                       training
+shim                     training
+Guo                    validation
+Guo                    validation
+He                     validation
+He                     validation
+He                     validation
+He                     validation
+He                     validation
+Kim 2020               validation
+Cho                          test
+Cho                          test
+Cho                          test
+Esfandiari                   test
+Guo                          test
+Guo                          test
+He                           test
+He                           test
+He                           test
+He                           test
+He                           test
+Ho                           test
+Kang                         test
+Kang                         test
+Key - Case 1                 test
+Key - Case 1                 test
+Key - Case 1                 test
+Key - Case 2                 test
+Key - Case 2                 test
+Key - Case 2                 test
+Key - Case 3                 test
+Key - Case 3                 test
+Key - Case 3                 test
+Lee 2023_Deep learning       test
+shim                         test
+ro                           test
+
+Number of studies: k = 40
+
+                         DOR              95%-CI     z  p-value
+Random effects model 71.2567 [40.3188; 125.9342] 14.68 < 0.0001
+
+Quantifying heterogeneity (with 95%-CIs):
+ tau^2 = 2.7826 [2.7745; 8.5104]; tau = 1.6681 [1.6657; 2.9173]
+ I^2 = 93.9% [92.5%; 95.0%]; H = 4.05 [3.66; 4.48]
+
+Test of heterogeneity:
+      Q d.f.  p-value
+ 638.99   39 < 0.0001
+
+Results for subgroups (random effects model):
+                       k      DOR              95%-CI  tau^2    tau      Q
+dataset = training     6  26.2069 [ 9.1041;  75.4385] 1.6121 1.2697  81.64
+dataset = validation   8  14.9196 [ 6.9225;  32.1553] 0.7039 0.8390  21.26
+dataset = test        26 178.4608 [72.7401; 437.8364] 4.6700 2.1610 488.63
+                       I^2
+dataset = training   93.9%
+dataset = validation 67.1%
+dataset = test       94.9%
+
+Test for subgroup differences (random effects model):
+                   Q d.f. p-value
+Between groups 17.58    2  0.0002
+
+Details of meta-analysis methods:
+- Inverse variance method
+- DerSimonian-Laird estimator for tau^2
+- Jackson method for confidence interval of tau^2 and tau
+- Calculation of I^2 based on Q
+Review:     Accuracy
+Outcome:    Accuracy
+
+                         events              95%-CI %W(random)    dataset
+He                      81.2121 [74.4049;  86.8632]        2.6   training
+He                      76.5060 [69.3121;  82.7287]        2.6   training
+He                      81.3253 [74.5526;  86.9447]        2.6   training
+He                      82.5301 [75.8837;  87.9770]        2.6   training
+He                      84.3373 [77.8988;  89.5063]        2.6   training
+shim                    91.9984 [90.8556;  93.0400]        2.9   training
+Guo                     88.8889 [75.9464;  96.2923]        2.3 validation
+Guo                     55.5556 [39.9973;  70.3556]        1.8 validation
+He                      82.3529 [69.1274;  91.5991]        2.2 validation
+He                      74.5098 [60.3666;  85.6737]        2.0 validation
+He                      74.5098 [60.3666;  85.6737]        2.0 validation
+He                      80.0000 [66.2817;  89.9698]        2.1 validation
+He                      84.3137 [71.4124;  92.9759]        2.2 validation
+Kim 2020                83.7443 [81.4232;  85.8823]        2.8 validation
+Cho                     75.0000 [64.0637;  84.0120]        2.3       test
+Cho                     88.6076 [79.4722;  94.6563]        2.5       test
+Cho                     87.1795 [77.6838;  93.6772]        2.5       test
+Esfandiari              92.0000 [86.4426;  95.7980]        2.7       test
+Guo                     81.0000 [71.9302;  88.1557]        2.4       test
+Guo                     77.0000 [67.5141;  84.8268]        2.4       test
+He                      73.8095 [57.9603;  86.1390]        1.9       test
+He                      78.0488 [62.3863;  89.4392]        1.9       test
+He                      69.0476 [52.9139;  82.3779]        1.8       test
+He                      73.8095 [57.9603;  86.1390]        1.9       test
+He                      82.9268 [67.9439;  92.8485]        2.1       test
+Ho                      88.1443 [82.7433;  92.3341]        2.7       test
+Kang                    79.4118 [74.7186;  83.5842]        2.7       test
+Kang                    78.3094 [74.8741;  81.4755]        2.8       test
+Key - Case 1           100.0000 [98.8246; 100.0000]        2.9       test
+Key - Case 1            99.3610 [97.7110;  99.9225]        2.9       test
+Key - Case 1            98.7261 [96.7706;  99.6518]        2.9       test
+Key - Case 2            99.7872 [98.8203;  99.9946]        2.9       test
+Key - Case 2            97.4522 [95.5919;  98.6768]        2.9       test
+Key - Case 2            97.0213 [95.0527;  98.3621]        2.9       test
+Key - Case 3           100.0000 [99.2985; 100.0000]        2.9       test
+Key - Case 3            99.4275 [98.3360;  99.8818]        2.9       test
+Key - Case 3            98.4733 [97.0140;  99.3386]        2.9       test
+Lee 2023_Deep learning  94.4805 [93.6146;  95.2607]        2.9       test
+shim                    91.7969 [87.7339;  94.8505]        2.8       test
+ro                      98.3784 [96.5040;  99.4026]        2.9       test
+
+Number of studies: k = 40
+Number of observations: o = 14314
+Number of events: e = 13091
+
+                      events             95%-CI
+Random effects model 86.7632 [83.6825; 89.8439]
+
+Quantifying heterogeneity (with 95%-CIs):
+ tau^2 = 0.0086 [0.0055; 0.0159]; tau = 0.0927 [0.0742; 0.1259]
+ I^2 = 97.0% [96.4%; 97.4%]; H = 5.75 [5.30; 6.24]
+
+Test of heterogeneity:
+       Q d.f.  p-value
+ 1289.79   39 < 0.0001
+
+Results for subgroups (random effects model):
+                       k  events             95%-CI  tau^2    tau      Q   I^2
+dataset = training     6 83.5172 [78.9000; 88.1344] 0.0026 0.0510  56.21 91.1%
+dataset = validation   8 79.3073 [73.3165; 85.2980] 0.0048 0.0692  19.96 64.9%
+dataset = test        26 89.6962 [85.9832; 93.4093] 0.0083 0.0912 656.30 96.2%
+
+Test for subgroup differences (random effects model):
+                  Q d.f. p-value
+Between groups 9.68    2  0.0079
+
+Details of meta-analysis methods:
+- Inverse variance method
+- Restricted maximum-likelihood estimator for tau^2
+- Q-Profile method for confidence interval of tau^2 and tau
+- Calculation of I^2 based on Q
+- Untransformed proportions
+- Clopper-Pearson confidence interval for individual studies
+- Continuity correction of 0.5 in studies with zero cell frequencies
+- Events per 100 observations

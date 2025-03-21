@@ -1,0 +1,314 @@
+```{r}
+df_meta <- df_all
+
+df_meta$other.grouping[c(6,41,84,127)] <- "(CNN) based on the\nVoxception-ResNet"
+
+df_diag <- df_meta  %>% 
+    mutate(DP = TP+FN, DN = FP+TN) %>% 
+    select(c(Study.ID,lesions,AI_model,other.grouping,TP,FN,FP,TN,DP,DN,modality,dataset)) %>% 
+    drop_na (TP)  %>% 
+    drop_na(TN) %>% 
+    mutate_all(~ifelse(is.na(.),"",.)) %>% 
+    mutate(across(seq(5,10),as.double))
+
+sensetivity <- meta::metaprop(
+    data = df_diag,
+    event = TP,
+    n = DP,
+    subgroup = dataset,
+    sm = "PRAW",
+    studlab = Study.ID,
+    common = FALSE,
+    random = TRUE,
+    title = "sensetivity",
+    outclab = "Sensetivity",
+    pscale = 100
+)
+# summary(sensetivity)
+
+specificity <- meta::metaprop(
+    data = df_diag,
+    event = TN,
+    n = DN,
+    sm = "PRAW",
+    subgroup = dataset,
+    studlab = Study.ID,
+    common = FALSE,
+    random = TRUE,
+    title = "Specificity",
+    outclab = "Specificity",
+    pscale = 100
+)
+
+# summary(specificity)
+```
+
+```{r table_for_forestplot}
+df_plot <- data.frame(Study = sensetivity$studlab)
+
+df_plot$dataset <- sensetivity$subgroup
+df_plot$modality <- df_diag$modality
+df_plot$lesion <- df_diag$lesions
+df_plot$"AI model" <- df_diag$other.grouping
+df_plot$"Sensetivity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)", sensetivity$TE*100, sensetivity$lower*100, sensetivity$upper*100)
+df_plot$"Weight" <- round(sensetivity$w.random*100/sum(sensetivity$w.random),1)
+df_plot$Sensetivity <- paste(rep(" ",15),collapse = " ")
+df_plot$"Specificity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)", specificity$TE*100, specificity$lower*100, specificity$upper*100)
+df_plot$" Weight" <- round(specificity$w.random*100/sum(specificity$w.random),1)
+df_plot$Specificity <- paste(rep(" ",15),collapse = " ")
+df_plot$sen <- sensetivity$TE
+df_plot$sen_low <- sensetivity$lower
+df_plot$sen_hi <- sensetivity$upper
+df_plot$spe <- specificity$TE
+df_plot$spe_low <- specificity$lower
+df_plot$spe_hi <- specificity$upper
+```
+```{r subgroup_rows}
+df_sgp <- data.frame(row.names = c(1:3))
+
+df_sgp$Study <-  ""
+df_sgp$dataset <- c("training","validation","test")
+df_sgp$modality <- ""
+df_sgp$lesion <- ""
+df_sgp$"AI model" <- ""
+df_sgp$"Sensetivity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)\n I^2 = %.2f (%.2f - %.2f)", sensetivity$TE.random.w*100, sensetivity$lower.random.w*100, sensetivity$upper.random.w*100,sensetivity$I2.w,sensetivity$lower.I2.w,sensetivity$upper.I2.w)
+df_sgp$"Weight" <- round(sensetivity$w.random.w*100/sum(sensetivity$w.random.w),2)
+df_sgp$Sensetivity  <-  paste(rep(" ",15),collapse = " ")
+df_sgp$"Specificity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)\nI^2 = %.2f (%.2f - %.2f)", specificity$TE.random.w*100, specificity$lower.random.w*100, specificity$upper.random.w*100,specificity$I2.w,specificity$lower.I2.w,specificity$upper.I2.w)
+df_sgp$" Weight" <- round(specificity$w.random.w*100/sum(specificity$w.random.w),2)
+df_sgp$Specificity  <-  paste(rep(" ",15),collapse = " ")
+df_sgp$sen <- sensetivity$TE.random.w
+df_sgp$sen_low <- sensetivity$lower.random.w
+df_sgp$sen_hi <- sensetivity$upper.random.w
+df_sgp$spe <- specificity$TE.random.w
+df_sgp$spe_low <- specificity$lower.random.w
+df_sgp$spe_hi <- specificity$upper.random.w
+```
+```{r summary_row}
+# //STUB - add summary measures
+df_plot_sum <- data.frame(Study = "Total")
+
+df_plot_sum$dataset <- ""
+df_plot_sum$modality <- ""
+df_plot_sum$lesion <- ""
+df_plot_sum$"AI model" <- ""
+df_plot_sum$"Sensetivity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)\n I^2 = %.2f (%.2f - %.2f)", sensetivity$TE.random*100, sensetivity$lower.random*100, sensetivity$upper.random*100,sensetivity$I2,sensetivity$lower.I2,sensetivity$upper.I2)
+df_plot_sum$"Weight" <- ""
+df_plot_sum$Sensetivity <- paste(rep(" ",15),collapse = " ")
+df_plot_sum$"Specificity (95%CI)" <- sprintf("%.2f (%.2f - %.2f)\n I^2 = %.2f (%.2f - %.2f)", specificity$TE.random*100, specificity$lower.random*100, specificity$upper.random*100,specificity$I2,specificity$lower.I2,specificity$upper.I2)
+df_plot_sum$" Weight" <- ""
+df_plot_sum$Specificity <- paste(rep(" ",15),collapse = " ")
+df_plot_sum$sen <- sensetivity$TE.random
+df_plot_sum$sen_low <- sensetivity$lower.random
+df_plot_sum$sen_hi <- sensetivity$upper.random
+df_plot_sum$spe <- specificity$TE.random
+df_plot_sum$spe_low <- specificity$lower.random
+df_plot_sum$spe_hi <- specificity$upper.random
+```
+```{r merge_dataframes}
+df_plot <- df_plot %>% rbind(df_sgp) %>% rbind(df_plot_sum)
+
+# colnames(df_plot)
+# head(df_diag)
+```
+
+```{r forest_plots}
+library(forestploter)
+
+p <- forestploter::forest(
+    df_plot[,c(1:11)],
+    est = list(df_plot$sen,df_plot$spe),
+    lower = list(df_plot$sen_low,df_plot$spe_low),
+    upper = list(df_plot$sen_hi,df_plot$spe_hi),
+    xlim = c(.4,1),
+    ticks_at = c(.4,.6,.8,1),
+    ref_line = c(sensetivity$TE.random,specificity$TE.random),
+    ci_column = c(8,11),
+    is_summary = c(rep(FALSE,dim(df_plot)[1]-4),rep(TRUE,4)),
+    title = "Sensetivity and Specificity of AI models in diagnosis of shoiulder lesions using MRI\n"
+)
+
+p <- add_border(
+    p,
+    row = c(6,14,40,43),
+    col = NULL,
+    # part = c("body", "header"),
+    where = c("bottom"),
+    gp = gpar(lwd = 2)
+)
+```
+
+```{r}
+name <- "sensetivity and specificity.jpg"
+size <- get_wh(p,unit = "cm")
+if(export_status){
+    jpeg(file = paste(export_path,name,sep=""),width = size[1],height = size[2],units = "cm",res = 300)
+    plot(p)
+    dev.off()
+}else {
+   plot(p)
+}
+```
+## meta-analysis of Diagnostic odds ratio
+```{r}
+library(mada)
+df_mada  <- df_diag %>% 
+    mutate(names = Study.ID) %>% 
+    select(c(names, TP,FN,FP,TN))
+head(df_mada)
+
+m  <-  mada::madauni(
+    df_mada,
+    type = "DOR",
+    method = "DSL",
+    suppress = FALSE
+)
+
+m0 <- m$descr
+m1 <- m$descr$DOR
+nm <- m0$names
+te <- log(m1$DOR)
+se <- m1$se.lnDOR
+
+mDOR <- meta::metagen(
+    TE = te,
+    seTE = se,
+    sm = "DOR",
+    method.tau = "DL",
+    subgroup = df_diag$dataset,
+    studlab = nm,
+    title = "Diognastic Odds Ratio ",
+    common = FALSE
+)
+
+mAccu <- meta::metaprop(
+    event = TP+TN,
+    n = TP+TN+FP+FN,
+    studlab = Study.ID,
+    data = df_diag,
+    sm = "PRAW",
+    subgroup = dataset,
+    common = FALSE,
+    random = TRUE,
+    title = "Accuracy",
+    outclab = "Accuracy",
+    pscale = 100
+)
+
+# colnames(df_diag)
+# summary(DOR)
+# meta::forest(DOR,leftlabs=c("study","ln(DOR)","ln(se.DOR)"))
+```
+```{r "Database for DOR plot"}
+df_plot <- data.frame(
+    Study = mDOR$studlab
+)
+df_plot$Dataset <- df_diag$dataset
+df_plot$Modality <- df_diag$modality
+df_plot$Lesion <- df_diag$lesions
+df_plot$"AI Model" <- df_diag$other.grouping
+df_plot$"ln(DOR)"  <- round(te,2)
+df_plot$"SE ln(DOR)" <- round(se,2)
+df_plot$"log Diagnostic Odds Ratio\n(DOR)" <- paste(rep("    ",7),collapse = " ")
+df_plot$"Weight" <- sprintf("%.2f %s",round(mDOR$w.random,2),"%")
+df_plot$"Accuracy value" <- sprintf("%.2f %s",mAccu$TE*100,"%")
+df_plot$SE <- sprintf("%.2f",mAccu$seTE*100)
+df_plot$Accuracy <- paste(rep("    ",7),collapse = " ")
+df_plot$TE <- te
+df_plot$low <- log(m1$DOR.ci[,1])
+df_plot$hi <- log(m1$DOR.ci[,2])
+df_plot$TE2 <- mAccu$TE*100
+df_plot$low2 <- mAccu$lower*100
+df_plot$hi2 <- mAccu$upper*100
+
+# DOR$TE.random.w
+# DOR$seTE.random.w[1]
+df_reformat <- df_plot %>% 
+    dplyr::arrange(Modality) %>% 
+    add_row(
+        Dataset = c("training","validation","test"), 
+        "ln(DOR)" = round(mDOR$TE.random.w,2),
+        "SE ln(DOR)" = round(mDOR$seTE.random.w,2),
+        "log Diagnostic Odds Ratio\n(DOR)" = "",
+        "Accuracy value" = sprintf("%.2f %s",mAccu$TE.random.w*100,"%"),
+        "SE" = sprintf("%.2f",mAccu$seTE.random.w*100),
+        Accuracy = "",
+        TE = mDOR$TE.random.w,
+        low = mDOR$lower.random.w,
+        hi = mDOR$upper.random.w,
+        TE2 = mAccu$TE.random.w*100,
+        low2 = mAccu$lower.random.w*100,
+        hi2 = mAccu$upper.random.w*100
+    ) %>% 
+    dplyr::arrange(Dataset) %>% 
+    add_row(
+        Study = "Overall",
+        Lesion = sprintf("tau^2 = %.3f [%.3f - %.3f]",mDOR$tau2, mDOR$lower.tau2,mDOR$upper.tau2),
+        "AI Model" = sprintf("I2 = %.2f [%.2f - %.2f]", mDOR$I2, mDOR$lower.I2, mDOR$upper.I2),
+        "ln(DOR)" = round(mDOR$TE.random,2),
+        "SE ln(DOR)" = round(mDOR$seTE.random,2),
+        "log Diagnostic Odds Ratio\n(DOR)" = "",
+        "Accuracy value" = sprintf("%.2f %s",mAccu$TE.random*100,"%"),
+        "SE" = sprintf("%.2f",mAccu$seTE.random*100),
+        Accuracy = "",
+        TE = mDOR$TE.random,
+        low = mDOR$lower.random,
+        hi = mDOR$upper.random,
+        TE2 = mAccu$TE.random*100,
+        low2 = mAccu$lower.random*100,
+        hi2 = mAccu$upper.random*100
+    ) %>% 
+    mutate_all(~ifelse(is.na(.),"",.)) %>% 
+    mutate(across(c(TE2,low2,hi2),as.double))
+```
+```{r "forestplot for R"}
+p2 <- forestploter::forest(
+    df_reformat[1:12],
+    est = list(df_reformat$TE,df_reformat$TE2),
+    lower = list(df_reformat$low,df_reformat$low2),
+    upper = list(df_reformat$hi,df_reformat$hi2),
+    ci_column = c(8,12),
+    ticks_at = list(seq(0,15,by = 5),c(40,60,80,100)),
+    is_summary = c(rep(FALSE,26),TRUE,rep(FALSE,6),TRUE,rep(FALSE,8),TRUE,TRUE),
+    title = "Diognastic odds ratio (DOR) and Accuracy of the models in diagnosis of shoulder lesions"
+)
+p2 <- add_border(
+    p2,
+    row = c(27,34,43,44),
+    col = NULL,
+    # part = c("body", "header"),
+    where = c("bottom"),
+    gp = gpar(lwd = 2)
+)
+p2 <- add_border(
+    p2,
+    row = c(27,34,43,44),
+    col = NULL,
+    # part = c("body", "header"),
+    where = c("top"),
+    gp = gpar(lty = "dashed")
+)
+```
+
+```{r export_plot}
+name = "DOR.jpg"
+size = get_wh(p2,unit = "cm")
+if(export_status){
+    jpeg(paste(export_path,name,sep = ""),width = size[1], height = size[2],units = "cm" ,res = 300)
+    plot(p2)
+    dev.off()
+}else{
+    plot(p2)
+}
+```
+```{r "report the summaries"}
+if(export_summary){
+    name = "meta-analysis results.pdf"
+    sink(file =paste(export_path,name,sep = ""),type = "output")
+    print(summary(sensetivity))
+    print(summary(specificity))
+    print(summary(mDOR))
+    print(summary(mAccu))
+    sink()
+}
+```
