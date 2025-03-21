@@ -9,9 +9,13 @@ source_rmd = function(file, ...) {
 ```{r}
 source_rmd("shoulder/meta-analysis/data preperation and cleaning.rmd")
 
-export_status = TRUE
-export_summary = TRUE
+export_status = FALSE
+export_summary = FALSE
 export_path = "shoulder/meta-analysis/output/"
 # get_wh(p,unit="cm")
 source_rmd("shoulder/meta-analysis/meta-analysis.rmd")
+```
+```{r}
+name  <- "meta-analysis data.csv"
+write.csv(df_diag,paste(export_path,name,sep = ""))
 ```
